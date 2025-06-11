@@ -13,6 +13,13 @@ const productSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    /* gender: {
+        type: String,
+        snum: ["man" , "woman"]
+    }, */
+    image: {
+        type: String,
     }
 });
 

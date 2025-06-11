@@ -1,24 +1,14 @@
-import axios from "axios";
-import { useState } from "react";
-import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import CreateProudct from "./pages/Products/CreateProduct";
+import Products from "./pages/Products/Products";
 
 
-function App(){
-  let [message , setMessage] = useState("");
-  useEffect(() =>{
-    axios.get("/api/home").then((res) => {
-      console.log(res.data.message)
-      setTimeout(() => {
-        setMessage(res.data.message);
-      }, 2000)
-    }).catch((err) => {
-      console.log(err)
-    })
-  })
+function App() {
   return (
-    <div>
-      <h2>{message.trim() !== "" ? message : "Hello Everyone"}</h2>
-    </div>
+    <Routes>
+      <Route path="/" element={<Products />} />
+      <Route path="/new" element={<CreateProudct />} />
+    </Routes>
   )
 }
 

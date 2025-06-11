@@ -15,8 +15,9 @@ connectDb().then(() => {
 })
 
 const initDb = async () => {
+    await Product.deleteMany({});
    let allProducts = await Product.insertMany(products);
    console.log(allProducts)
 }
 
-// initDb()
+initDb()
