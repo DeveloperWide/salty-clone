@@ -10,12 +10,17 @@ connectDb().then(() => {
     console.log(`Error while connecting with Database`, err)
 })
 
+
+
 // Routes
 const productRoutes = require("./routes/product");
 
+// Middlewares
 app.use(cors({
     origin: "http://localhost:5173"
-}))
+}));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.use("/api/products", productRoutes);
 

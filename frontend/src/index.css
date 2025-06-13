@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+
+input{
+    @apply border border-black m-5 outline-none rounded ps-1 py-2
+}

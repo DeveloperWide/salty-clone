@@ -29,7 +29,8 @@ module.exports.createProudct = async (req, res) => {
                 _id: svdProduct._id,
                 title: svdProduct.title,
                 description: svdProduct.description,
-                price: svdProduct.price
+                price: svdProduct.price,
+                image: svdProduct.image
             }
         })
     }catch(err){

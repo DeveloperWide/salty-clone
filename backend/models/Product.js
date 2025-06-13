@@ -14,12 +14,18 @@ const productSchema = new Schema({
         type: Number,
         required: true
     },
-    /* gender: {
+    gender: {
         type: String,
-        snum: ["man" , "woman"]
-    }, */
+        enum: ["Man" , "Woman"]
+    },
+    inStock: {
+        type: Boolean,
+        default: true,
+        required: true
+    },
     image: {
         type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdD7G7FFg1UKZFXhyP45b4AvY-qKEFvfjj3w&s"
     }
 });
 
