@@ -4,11 +4,6 @@ import { useState } from "react";
 
 const AdminProducts = () => {
     const [data, setData] = useState([]);
-    const products = [
-        { name: "Casual Shoes", category: "Shoes", offerPrice: 999, inStock: true, image: "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage.png", },
-        { name: "Casual Shoes", category: "Shoes", offerPrice: 999, inStock: false, image: "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage2.png", },
-        { name: "Casual Shoes", category: "Shoes", offerPrice: 999, inStock: true, image: "https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/card/productImage3.png", },
-    ];
 
     useEffect(() => {
         axios.get(`/api/products`).then((res) => {
@@ -19,7 +14,6 @@ const AdminProducts = () => {
         })
     }, []);
 
-    console.log(data)
 
     return (
         <div className="flex-1 py-10 flex flex-col justify-between">
@@ -31,7 +25,7 @@ const AdminProducts = () => {
                             <tr>
                                 <th className="px-4 py-3 font-semibold truncate">Product</th>
                                  <th className="px-4 py-3 font-semibold truncate">Gender</th>  
-                                <th className="px-4 py-3 font-semibold truncate hidden md:block">Selling Price</th>
+                                <th className="px-4 py-3 font-semibold truncate max-sm:hidden md:block">Selling Price</th>
                                 <th className="px-4 py-3 font-semibold truncate">In Stock</th> 
                             </tr>
                         </thead>
@@ -48,7 +42,7 @@ const AdminProducts = () => {
                                     <td className="px-4 py-3 max-sm:hidden">${product.price}</td>
                                       <td className="px-4 py-3">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                                            <input type="checkbox" className="sr-only peer" defaultChecked={product.inStock} />
+                                            <input type="checkbox" className="sr-only peer" name="inStock" defaultChecked={product.inStock} />
                                             <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
                                             <span className="dot absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                                         </label>
