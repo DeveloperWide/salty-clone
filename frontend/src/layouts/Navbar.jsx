@@ -37,7 +37,7 @@ const Navbar = () => {
             <nav className="flex flex-col justify-center items-center h-40 bg-gradient-to-b from-[#7E46AC] to-[#9546AC] text-white px-7 py-10 mt-8">
 
                 {/* Top row */}
-                <div className="nav-header-container flex justify-between items-center w-full">
+                <div className="nav-header-container flex justify-between items-center w-[97%]">
                     <div className="search">
                         <i className="fa-solid fa-magnifying-glass text-xl"></i>
                     </div>
@@ -66,9 +66,10 @@ const Navbar = () => {
                 </ul>
 
                 {/* Gender */}
-                <div className="nav-gender uppercase text-[15px] tracking-widest font-bold">
-                    Woman | Man
+                <div className="nav-gender uppercase text-[14px] tracking-[0.3rem] font-bold">
+                    <a href="">Woman</a>  |  <a href="">Man</a>
                 </div>
+                
             </nav>
         </>
     );

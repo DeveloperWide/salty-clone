@@ -4,12 +4,14 @@ import Products from "./pages/Products/Products";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import Navbar from "./layouts/Navbar";
+import ImageGallery from "./components/ImageGallery";
 
 
 function App() {
   return (
     <>
     <Navbar />
+    <ImageGallery />
      <Routes>
       <Route path="/" element={<Products />} />
       <Route path="/admin/dashboard" element={<AdminPanel />}>
