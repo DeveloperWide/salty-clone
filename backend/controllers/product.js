@@ -17,11 +17,13 @@ module.exports.getProducts = async (req, res) => {
 }
 
 module.exports.createProudct = async (req, res) => {
+    console.log(req.files)
     try {
         let newProduct = new Product({
             ...req.body
         });
         let svdProduct = await newProduct.save();
+        console.log(svdProduct);
         res.status(200).json({
             success: true,
             message: "Product Successfully Created",
@@ -29,7 +31,10 @@ module.exports.createProudct = async (req, res) => {
                 _id: svdProduct._id,
                 title: svdProduct.title,
                 description: svdProduct.description,
-                price: svdProduct.price,
+                gender: svdProduct.gender,
+                category: svdProduct.category,
+                productPrice: svdProduct.productPrice,
+                offerPrice: svdProduct.offerPrice,
                 image: svdProduct.image
             }
         })

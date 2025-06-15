@@ -2,6 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import Card from "../../components/Card";
+import Navbar from "../../layouts/Navbar";
+import ImageGallery from "../../components/ImageGallery";
 
 function Products() {
   let [data, setData] = useState([])
@@ -16,13 +18,17 @@ function Products() {
 
   console.log(data)
   return (
-    <div className="flex gap-3 justify-center items-center flex-wrap m-5">
+    <>
+    <Navbar />
+    <ImageGallery />
+     <div className="flex gap-3 justify-center items-center flex-wrap m-5">
       {data.map((obj, idx) => {
         return (
           <Card title={obj.title} imageUrl={obj.image} price={obj.price} key={idx}/>
         )
       })}
     </div>
+    </>
   )
 }
 

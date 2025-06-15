@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {Schema, model} = mongoose;
+const { Schema, model } = mongoose;
 
 const productSchema = new Schema({
     title: {
@@ -10,13 +10,31 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
-    price: {
+    productPrice: {
         type: Number,
+        min: 99,
         required: true
+    },
+    offerPrice:{
+        type: Number,
+        min: 1,
     },
     gender: {
         type: String,
-        enum: ["Man" , "Woman"]
+        enum: ["Man", "Woman" , "Other"]
+    },
+    category: {
+        type: String,
+        enum: ["Earrings",
+            "Necklaces",
+            "Rings",
+            "Jewellery Sets",
+            "Bracelets",
+            "Gift Boxes",
+            "Couple Sets",
+            "Sunglasses",
+            "Hats & Caps",
+            "Hair Accessories"]
     },
     inStock: {
         type: Boolean,
