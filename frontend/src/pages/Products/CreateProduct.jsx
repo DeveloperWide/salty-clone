@@ -14,9 +14,9 @@ const CreateProduct = () => {
     gender: "Woman",
     category: "",
     inStock: "true",
-    images: []
+    product_images: []
   });
- 
+
   const categories = [
     "Earrings",
     "Necklaces",
@@ -39,7 +39,27 @@ const CreateProduct = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    axios.post(`/api/products/new`, data).then((res) => {
+    const formData = new FormData();
+
+    // Append Data
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("productPrice", data.productPrice);
+    formData.append("offerPrice", data.offerPrice);
+    formData.append("gender", data.gender);
+    formData.append("category", data.category);
+    formData.append("inStock", data.inStock);
+
+    // Appent (limit to 5)
+    data.product_images.slice(0, 5).forEach((imgObj, index) => {
+      formData.append("product_images", imgObj.file)
+    })
+
+    axios.post(`/api/products/new`, formData, {
+      headers: {
+        "Content-Type": "multipar/form-data"
+      }
+    }).then((res) => {
       console.log(res.data.data)
     }).catch((err) => {
       console.log(err)
@@ -105,11 +125,12 @@ const CreateProduct = () => {
               id="dropzone-file"
               type="file"
               className="hidden"
+              name='product_images'
               multiple
               accept="image/*"
               onChange={(e) => {
                 const selectedFiles = Array.from(e.target.files);
-                if (selectedFiles.length + data.images.length > 5) {
+                if (selectedFiles.length + data.product_images.length > 5) {
                   alert("You can upload a maximum of 5 images.");
                   return;
                 }
@@ -120,14 +141,14 @@ const CreateProduct = () => {
                 }));
 
                 setData((prev) => {
-                  return {...prev, images: [...filePreviews]}
+                  return { ...prev, product_images: [...filePreviews] }
                 });
               }}
             />
 
           </label>
           <div className="flex flex-wrap gap-4 mt-4">
-            {data.images.map((img, index) => (
+            {data.product_images.map((img, index) => (
               <div key={index} className="flex flex-col items-center">
                 <img
                   src={img.preview}

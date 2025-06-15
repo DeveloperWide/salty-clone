@@ -3,6 +3,7 @@ const app = express();
 const PORT = 8080;
 const cors = require("cors");
 const { connectDb } = require("./config/db");
+const dotenv = require("dotenv").config();
 
 connectDb().then(() => {
     console.log(`Connected to Db`)

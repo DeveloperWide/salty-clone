@@ -24,7 +24,8 @@ function Products() {
      <div className="flex gap-3 justify-center items-center flex-wrap m-5">
       {data.map((obj, idx) => {
         return (
-          <Card title={obj.title} imageUrl={obj.image} price={obj.price} key={idx}/>
+          // imgUrl , Title , productPrice, offerPrice, hoverImage
+          <Card Title={obj.title} imgUrl={obj.product_images[0].url} hoverImage={obj.product_images[1].url} productPrice={obj.productPrice} offerPrice={obj.offerPrice} key={idx}/>
         )
       })}
     </div>

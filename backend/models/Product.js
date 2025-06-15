@@ -41,10 +41,19 @@ const productSchema = new Schema({
         default: true,
         required: true
     },
-    image: {
-        type: String,
-        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdD7G7FFg1UKZFXhyP45b4AvY-qKEFvfjj3w&s"
-    }
+    product_images: [
+        {
+            filename: {
+                type: String,
+                required: true
+            },
+            url:{
+                type: String,
+                required: true
+            },
+            _id: false
+        }
+    ]
 });
 
 const Product = model("Product", productSchema);

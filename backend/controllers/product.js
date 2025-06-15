@@ -17,11 +17,25 @@ module.exports.getProducts = async (req, res) => {
 }
 
 module.exports.createProudct = async (req, res) => {
-    console.log(req.files)
     try {
         let newProduct = new Product({
-            ...req.body
+            ...req.body,
         });
+
+        if (req.files && req.files.length > 0) {
+            newProduct.product_images = req.files.map((obj) => {
+                return {
+                    filename: obj.filename,
+                    url: obj.path
+                }
+            });
+        }else{
+            res.status(400).json({
+                success: false,
+                message: "No Images for Product"
+            })
+        }
+
         let svdProduct = await newProduct.save();
         console.log(svdProduct);
         res.status(200).json({
@@ -38,7 +52,7 @@ module.exports.createProudct = async (req, res) => {
                 image: svdProduct.image
             }
         })
-    }catch(err){
+    } catch (err) {
         console.log(err)
         res.status(500).json({
             success: false,
