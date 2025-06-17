@@ -29,7 +29,7 @@ module.exports.createProudct = async (req, res) => {
                     url: obj.path
                 }
             });
-        }else{
+        } else {
             res.status(400).json({
                 success: false,
                 message: "No Images for Product"
@@ -57,6 +57,55 @@ module.exports.createProudct = async (req, res) => {
         res.status(500).json({
             success: false,
             message: "Server Error Occurred",
+        })
+    }
+}
+
+module.exports.showProduct = async (req, res) => {
+    try {
+        let { id } = req.params;
+        let product = await Product.findById(id);
+        res.status(200).json({
+            success: true,
+            data: product
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Server Error Occurred",
+        })
+    }
+}
+
+module.exports.updateProductField = async (req, res) => {
+    try {
+        let produdctToBeUpdated = await Product.findByIdAndUpdate(req.params.id, { ...req.body });
+        res.status(200).json({
+            success: true,
+            data: produdctToBeUpdated
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            success: false,
+            message: "Error Occurred"
+        })
+    }
+}
+
+module.exports.deleteProduct = async (req, res) => {
+    try {
+        let { id } = req.params;
+        const product = await Product.findByIdAndDelete(id);
+        res.status(200).json({
+            success: true,
+            message: "Product Deleted Successfully",
+            data: product
+        })
+    } catch (err) {
+        res.status(500).json({
+            success: false,
+            message: "Server Error Occurred"
         })
     }
 }
