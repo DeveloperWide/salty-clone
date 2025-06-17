@@ -1,12 +1,13 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { FormControl, FormLabel, Radio, RadioGroup, FormControlLabel, InputLabel, Select, MenuItem, Button, } from '@mui/material';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useState } from 'react';
 import axios from 'axios';
+import { ToastContainer, Zoom, toast } from 'react-toastify';
 
 const CreateProduct = () => {
-  const [data, setData] = useState({
+
+  const initialState = {
     title: "",
     description: "",
     productPrice: "",
@@ -15,7 +16,10 @@ const CreateProduct = () => {
     category: "",
     inStock: "true",
     product_images: []
-  });
+  };
+
+
+  const [data, setData] = useState(initialState);
 
   const categories = [
     "Earrings",
@@ -35,6 +39,18 @@ const CreateProduct = () => {
     setData((prevObj) => {
       return { ...prevObj, [e.target.name]: e.target.value }
     })
+  }
+
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    transition: Zoom,
   }
 
   const onSubmitHandler = (e) => {
@@ -60,14 +76,21 @@ const CreateProduct = () => {
         "Content-Type": "multipar/form-data"
       }
     }).then((res) => {
-      console.log(res.data.data)
+      // Clean up the object URLs
+      data.product_images.forEach((img) => URL.revokeObjectURL(img.preview));
+
+      // Reset the form
+      setData(initialState);
+
+      toast.success(res.data.message, { ...toastOptions });
     }).catch((err) => {
-      console.log(err)
+      toast.error(err?.response?.data?.message || "Delete failed", { ...toastOptions });
     })
   }
 
   return (
     <div>
+      <ToastContainer />
       <h2 className='text-3xl font-semibold italic text-[#7E46AC]'>Create Your Product</h2>
       <Box
         component="form"

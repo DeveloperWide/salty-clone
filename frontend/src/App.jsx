@@ -3,6 +3,7 @@ import CreateProudct from "./pages/Products/CreateProduct";
 import Products from "./pages/Products/Products";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminProducts from "./pages/Admin/AdminProducts";
+import ShowProduct from "./pages/Products/ShowProduct";
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
     <>
      <Routes>
       <Route path="/" element={<Products />} />
+      <Route path="/products/:productId" element={<ShowProduct />} />
       <Route path="/admin/dashboard" element={<AdminPanel />}>
         {/* 👇 This will render at /admin/dashboard */}
         {/* 👇 These change inside <Outlet /> in Sidebar */}

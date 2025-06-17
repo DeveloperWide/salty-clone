@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import Card from "../../components/Card";
 import Navbar from "../../layouts/Navbar";
 import ImageGallery from "../../components/ImageGallery";
+import { Outlet } from "react-router-dom";
+import { Button } from "@material-tailwind/react";
 
 function Products() {
   let [data, setData] = useState([])
@@ -22,10 +24,12 @@ function Products() {
     <Navbar />
     <ImageGallery />
      <div className="flex gap-3 justify-center items-center flex-wrap m-5">
+      <Button className="bg-gray-600">Button</Button>
       {data.map((obj, idx) => {
         return (
           // imgUrl , Title , productPrice, offerPrice, hoverImage
-          <Card Title={obj.title} imgUrl={obj.product_images[0].url} hoverImage={obj.product_images[1].url} productPrice={obj.productPrice} offerPrice={obj.offerPrice} key={idx}/>
+           
+            <Card title={obj.title} productId={obj._id} imgUrl={obj.product_images[0].url} hoverImage={obj.product_images[1].url} productPrice={obj.productPrice} offerPrice={obj.offerPrice} inStock={obj.inStock}  key={idx}/>
         )
       })}
     </div>

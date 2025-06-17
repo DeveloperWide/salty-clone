@@ -37,7 +37,7 @@ const ImageGallery = () => {
   return (
     <div className="relative w-full">
       {/* Image Container */}
-      <div className="relative h-96 md:h-96 overflow-hidden">
+      <div className="relative h-96 md:h-126 overflow-hidden">
         {images.map((img, i) => (
           <img
             key={i}
