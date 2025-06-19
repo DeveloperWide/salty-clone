@@ -1,22 +1,28 @@
 const Product = require("../models/Product");
+const { productValidationSchema } = require("../schema");
+const wrapAsync = require("../utillities/wrapAsync");
+const ExpressError = require("../utillities/ExpressError")
 
-module.exports.getProducts = async (req, res) => {
+module.exports.getProducts = wrapAsync(async (req, res, next) => {
     try {
         const allProducts = await Product.find();
         res.status(200).json({
             success: true,
             message: "All Products",
-            data: allProducts
+            data: [...allProducts],
         });
     } catch (err) {
         res.status(500).json({
             success: false,
             message: "Server Error Occurred",
-        })
+        });
     }
-}
+});
 
-module.exports.createProudct = async (req, res) => {
+// const {error, value} = productValidationSchema.validate(req.body);
+// console.log(error, "....." , value)
+
+module.exports.createProudct = wrapAsync(async (req, res, next) => {
     try {
         let newProduct = new Product({
             ...req.body,
@@ -26,14 +32,11 @@ module.exports.createProudct = async (req, res) => {
             newProduct.product_images = req.files.map((obj) => {
                 return {
                     filename: obj.filename,
-                    url: obj.path
-                }
+                    url: obj.path,
+                };
             });
         } else {
-            res.status(400).json({
-                success: false,
-                message: "No Images for Product"
-            })
+            next(new ExpressError("Send atleast a Image for product", 400))
         }
 
         let svdProduct = await newProduct.save();
@@ -49,63 +52,65 @@ module.exports.createProudct = async (req, res) => {
                 category: svdProduct.category,
                 productPrice: svdProduct.productPrice,
                 offerPrice: svdProduct.offerPrice,
-                image: svdProduct.image
-            }
-        })
+                image: svdProduct.image,
+            },
+        });
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(500).json({
             success: false,
             message: "Server Error Occurred",
-        })
+        });
     }
-}
+});
 
-module.exports.showProduct = async (req, res) => {
+module.exports.showProduct = wrapAsync(async (req, res, next) => {
     try {
         let { id } = req.params;
         let product = await Product.findById(id);
         res.status(200).json({
             success: true,
-            data: product
-        })
+            data: product,
+        });
     } catch (err) {
         res.status(500).json({
             success: false,
             message: "Server Error Occurred",
-        })
+        });
     }
-}
+});
 
-module.exports.updateProductField = async (req, res) => {
+module.exports.updateProductField = wrapAsync(async (req, res, next) => {
     try {
-        let produdctToBeUpdated = await Product.findByIdAndUpdate(req.params.id, { ...req.body });
+        let produdctToBeUpdated = await Product.findByIdAndUpdate(req.params.id, {
+            ...req.body,
+        });
         res.status(200).json({
             success: true,
-            data: produdctToBeUpdated
-        })
+            data: produdctToBeUpdated,
+        });
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(500).json({
             success: false,
-            message: "Error Occurred"
-        })
+            message: "Error Occurred",
+        });
     }
-}
+});
 
-module.exports.deleteProduct = async (req, res) => {
+module.exports.deleteProduct = wrapAsync(async (req, res, next) => {
     try {
         let { id } = req.params;
         const product = await Product.findByIdAndDelete(id);
         res.status(200).json({
             success: true,
             message: "Product Deleted Successfully",
-            data: product
-        })
+            data: product,
+        });
     } catch (err) {
         res.status(500).json({
             success: false,
-            message: "Server Error Occurred"
-        })
+            message: "Server Error Occurred",
+        });
     }
-}
+});
