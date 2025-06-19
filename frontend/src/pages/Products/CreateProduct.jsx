@@ -201,7 +201,6 @@ const CreateProduct = () => {
               >
                 <FormControlLabel value="Woman" control={<Radio />} label="Woman" />
                 <FormControlLabel value="Man" control={<Radio />} label="Man" />
-                <FormControlLabel value="Other" control={<Radio />} label="Other" />
               </RadioGroup>
             </FormControl>
             <br />

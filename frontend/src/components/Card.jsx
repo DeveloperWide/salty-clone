@@ -26,12 +26,18 @@ function Card({ imgUrl, productId, title, productPrice, offerPrice, hoverImage, 
       Hover Image
       
       */}
-          <p className="text-center p-2 font-semibold">{title}</p>
+          <p className="text-center px-1 py-1 font-semibold">{title.length > 20 ? `${title.slice(0, 20)}...` : title}</p>
           <div>
-            <span className="text-gray-500 line-through">Rs. {productPrice}.00</span>
+            <span className="text-gray-500 line-through">{productPrice.toLocaleString('en-IN', {
+              style: 'currency',
+              currency: 'INR'
+            })}</span>
             &nbsp;
             &nbsp;
-            <span>Rs. {offerPrice}.00</span>
+            <span>{offerPrice.toLocaleString('en-IN', {
+              style: 'currency',
+              currency: 'INR',
+            })}</span>
           </div>
           <button className="w-full bg-[#7B46AC] absolute bottom-0 py-2 rounded uppercase font-semibold text-[#ffffffe5] shadow shadow-amber-50 tracking-widest">Add To Cart</button>
         </div>

@@ -37,10 +37,10 @@ function ShowProduct() {
             <div className="grid md:grid-cols-2 gap-6">
                 {/* 🖼️ Image Gallery with Thumbnails */}
                 <div className="flex flex-col items-center space-y-4">
-                    <div className="w-full max-w-3xl">
+                    <div className="w-full h-full max-w-3xl">
                         <img
                             src={mainImage}
-                            className="w-full rounded-lg h-80 object-cover"
+                            className="w-full h-full rounded-lg object-cover"
                             alt="Main Product"
                         />
                     </div>

@@ -4,6 +4,7 @@ import Products from "./pages/Products/Products";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import ShowProduct from "./pages/Products/ShowProduct";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="new" element={<CreateProudct />} />
         <Route path="products" element={<AdminProducts />} />
       </Route>
+      <Route path="*" element={<NotFound />}/>
     </Routes>
     </>
   )

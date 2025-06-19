@@ -24,7 +24,6 @@ function Products() {
     <Navbar />
     <ImageGallery />
      <div className="flex gap-3 justify-center items-center flex-wrap m-5">
-      <Button className="bg-gray-600">Button</Button>
       {data.map((obj, idx) => {
         return (
           // imgUrl , Title , productPrice, offerPrice, hoverImage
