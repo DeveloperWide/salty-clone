@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import logo from "../assets/logo.webp";
+
 
 const Navbar = () => {
     const dropdownItems = ["Earrings", "Rings", "Necklaces", "Bracelets", "Jewellery Sets"];
@@ -73,7 +75,7 @@ const Navbar = () => {
 
             {/* Gender Links */}
             <div className="uppercase text-sm tracking-widest font-bold mt-4">
-                <a href="#">Woman</a> | <a href="#">Man</a>
+                <Link to="/">Woman</Link> | <Link to="/pages/mens-accessories">Man</Link>
             </div>
         </div>
     );
