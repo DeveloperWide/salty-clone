@@ -15,7 +15,7 @@ const productSchema = new Schema({
         min: 99,
         required: true
     },
-    offerPrice:{
+    offerPrice: {
         type: Number,
         min: 1,
     },
@@ -41,13 +41,22 @@ const productSchema = new Schema({
         default: true,
         required: true
     },
+    dimensions: {
+        type: String,
+    },
+    color: {
+        type: String,
+    },
+    material: {
+        type: String,
+    },
     product_images: [
         {
             filename: {
                 type: String,
                 required: true
             },
-            url:{
+            url: {
                 type: String,
                 required: true
             },

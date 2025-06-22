@@ -28,13 +28,15 @@ app.use("/api/products", productRoutes);
 
 if (process.env.NODE_ENV === "production") {
   app.all("/*", (req, res, next) => {
-    next(new ExpressError("Page Not Found", 404));
+    next(new ExpressError(404, "Page Not Found"));
   });
 }
+
 app.use((err, req, res, next) => {
-    let { error = "Serve Error Occurred", statusCode = 500 } = err;
-    res.status(statusCode).json({ error })
-})
+    const { statusCode = 500, message = "Something went wrong" } = err;
+    console.log("🔥 Backend Error:", err); // Good for debugging
+    res.status(statusCode).json({ error: message });
+});
 
 app.listen(PORT, () => {
     console.log(`Server is listing on PORT ${PORT}`)
