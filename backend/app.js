@@ -14,7 +14,9 @@ connectDb().then(() => {
 
 
 // Routes
-const productRoutes = require("./routes/product");
+const adminProductRoute = require("./routes/adminRoutes/products");
+const womansProductRoute = require("./routes/womansProductRoute/products");
+const mensProductRoute = require("./routes/mensProductRoute/products")
 const ExpressError = require("./utillities/ExpressError");
 
 // Middlewares
@@ -24,7 +26,9 @@ app.use(cors({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use("/api/products", productRoutes);
+app.use("/api/products", adminProductRoute);
+app.use("/api/woman/products", womansProductRoute);
+app.use("/api/man/products", mensProductRoute);
 
 if (process.env.NODE_ENV === "production") {
   app.all("/*", (req, res, next) => {

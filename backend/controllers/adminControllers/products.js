@@ -1,6 +1,6 @@
-const Product = require("../models/Product");
-const wrapAsync = require("../utillities/wrapAsync");
-const ExpressError = require("../utillities/ExpressError")
+const Product = require("../../models/Product");
+const wrapAsync = require("../../utillities/wrapAsync");
+const ExpressError = require("../../utillities/ExpressError")
 
 module.exports.getProducts = wrapAsync(async (req, res, next) => {
     const allProducts = await Product.find();

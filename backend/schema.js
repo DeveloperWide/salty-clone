@@ -19,4 +19,7 @@ module.exports.productValidationSchema = Joi.object({
     inStock: Joi.boolean().valid(true, false).default(true).required(),
     productPrice: Joi.number().required(),
     offerPrice: Joi.number().required(),
+    dimensions: Joi.string().allow(""),
+    material: Joi.string().allow(""),
+    color: Joi.string().allow("")
 }).required();
