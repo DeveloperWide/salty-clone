@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.webp";
 
 
-const Navbar = () => {
+const Navbar = ({logo}) => {
     const dropdownItems = ["Earrings", "Rings", "Necklaces", "Bracelets", "Jewellery Sets"];
 
     return (

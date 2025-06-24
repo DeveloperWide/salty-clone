@@ -61,11 +61,13 @@ const CreateProduct = () => {
       headers: { "Content-Type": "multipart/form-data" },
     })
       .then((res) => {
+        console.log(res)
         data.product_images.forEach((img) => URL.revokeObjectURL(img.preview));
         setData(initialState);
         toast.success(res.data.message, toastOptions);
       })
       .catch((err) => {
+        console.log(err)
         toast.error(err?.response?.data?.error || "Product creation failed.", toastOptions);
       });
   };

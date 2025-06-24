@@ -1,17 +1,20 @@
 import { Routes, Route, Router } from "react-router-dom";
-import CreateProudct from "./pages/Products/CreateProduct";
-import Products from "./pages/Products/Products";
+import CreateProudct from "./pages/Admin/CreateProduct";
 import AdminPanel from "./pages/Admin/AdminPanel";
 import AdminProducts from "./pages/Admin/AdminProducts";
 import ShowProduct from "./pages/Products/ShowProduct";
 import NotFound from "./pages/NotFound";
-
+import WomansProduct from "./pages/Products/Womans-Products/WomansProduct";
+import MensProduct from "./pages/Products/Mens-Accessories/MensProduct";
+import logo from "./assets/logo.webp";
+import alphaLogo from "./assets/saltyAlpha.avif"
 
 function App() {
   return (
     <>
      <Routes>
-      <Route path="/" element={<Products />} />
+      <Route path="/" element={<WomansProduct logo={logo}/>} />
+      <Route path="/pages/mens-accessories" element={<MensProduct logo={alphaLogo}/>} />
       <Route path="/products/:productId" element={<ShowProduct />} />
       <Route path="/admin/dashboard" element={<AdminPanel />}>
         {/* 👇 This will render at /admin/dashboard */}
