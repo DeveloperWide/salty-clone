@@ -19,6 +19,7 @@ const validateProduct = (req, res, next) => {
 
 // Retrive all Data
 router.get("/", adminProductController.getProducts);
+
 // Create New Product
 router.post("/new",  upload.array('product_images', 5), validateProduct, adminProductController.createProudct);
 
@@ -27,6 +28,9 @@ router.get("/:id", adminProductController.showProduct)
 
 // Update Product Field
 router.patch("/:id", adminProductController.updateProductField)
+
+// Update Product
+router.get("/:id", adminProductController.productToBeUpdated)
 
 // Delete Product
 router.delete("/:id", adminProductController.deleteProduct)

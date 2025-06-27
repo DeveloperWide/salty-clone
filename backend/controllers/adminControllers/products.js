@@ -30,7 +30,7 @@ module.exports.createProudct = wrapAsync(async (req, res, next) => {
             };
         });
     } else {
-        next(new ExpressError(400, "Send atleast a Image for product"))
+        return next(new ExpressError(400, "Send atleast a Image for product"));
     }
 
     let svdProduct = await newProduct.save();
@@ -84,6 +84,22 @@ module.exports.updateProductField = wrapAsync(async (req, res, next) => {
         });
     }
 });
+
+module.exports.productToBeUpdated = async (req, res) => {
+    try{
+        let {id} = req.params;
+        let productToBeUpdated = await Product.findById(id);
+        res.status(200).json({
+            success: true,
+            data: productToBeUpdated
+        })
+    }catch(err){
+        res.status(500).json({
+            success: false,
+            message: "Server Error Occurred"
+        })
+    }
+}
 
 module.exports.deleteProduct = wrapAsync(async (req, res, next) => {
     try {
