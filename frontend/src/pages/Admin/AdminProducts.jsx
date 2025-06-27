@@ -64,6 +64,7 @@ const AdminProducts = () => {
                         <thead className="text-gray-900 text-sm text-left">
                             <tr>
                                 <th className="px-4 py-3 font-semibold truncate"></th>
+                                <th className="px-4 py-3 font-semibold truncate"></th>
                                 <th className="px-4 py-3 font-semibold truncate">Product</th>
                                 <th className="px-4 py-3 font-semibold truncate max-sm:hidden ">Gender</th>
                                 <th className="px-4 py-3 font-semibold truncate max-sm:hidden md:block">Selling Price</th>
@@ -73,6 +74,9 @@ const AdminProducts = () => {
                         <tbody className="text-sm text-gray-500">
                             {data.map((product) => {
                                 return (<tr key={product._id} className="border-t border-gray-500/20">
+                                    <td className="text-center text-xl hover:text-blue-600  px-3">
+                                        <a href={`/admin/dashboard/${product._id}/edit`}><i className="fa-solid fa-pencil cursor-pointer"></i></a>
+                                    </td>
                                     <td className="text-center text-xl hover:text-red-500 cursor-pointer px-3" onClick={() => {
                                         deleteProduct(product._id)
                                     }}><i className="fa-regular fa-trash-can"></i></td>

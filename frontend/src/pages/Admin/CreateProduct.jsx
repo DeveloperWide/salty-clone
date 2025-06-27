@@ -10,6 +10,8 @@ import {
   Select,
   MenuItem,
   Button,
+  CircularProgress,
+  Modal
 } from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
@@ -30,6 +32,7 @@ const CreateProduct = () => {
     product_images: []
   };
 
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(initialState);
 
   const categories = [
@@ -51,6 +54,7 @@ const CreateProduct = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       if (key !== 'product_images') formData.append(key, data[key]);
@@ -69,11 +73,20 @@ const CreateProduct = () => {
       .catch((err) => {
         console.log(err)
         toast.error(err?.response?.data?.error || "Product creation failed.", toastOptions);
-      });
+      }).finally(() => {
+        setLoading(false);
+      })
   };
 
   return (
     <div className="p-6">
+      <Modal open={loading} sx={{ display: 'flex', bgcolor: "#00000005", alignItems: 'center', justifyContent: 'center' }}>
+        <Box>
+          <CircularProgress color="secondary" />
+          <p className="mt-4 text-gray-700 font-semibold">Creating your product...</p>
+        </Box>
+      </Modal>
+
       <ToastContainer />
       <h2 className="text-3xl font-bold text-purple-700 mb-6">Create Product</h2>
 

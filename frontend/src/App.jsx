@@ -8,6 +8,7 @@ import WomansProduct from "./pages/Products/Womans-Products/WomansProduct";
 import MensProduct from "./pages/Products/Mens-Accessories/MensProduct";
 import logo from "./assets/logo.webp";
 import alphaLogo from "./assets/saltyAlpha.avif"
+import UpdateProduct from "./pages/Admin/UpdateProduct";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/* 👇 These change inside <Outlet /> in Sidebar */}
         <Route path="new" element={<CreateProudct />} />
         <Route path="products" element={<AdminProducts />} />
+        <Route path=":productId/edit" element={<UpdateProduct />}/>
       </Route>
       <Route path="*" element={<NotFound />}/>
     </Routes>
