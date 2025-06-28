@@ -20,6 +20,8 @@ import { useParams } from "react-router-dom";
 
 function UpdateProduct() {
     const { productId } = useParams();
+    const [prevImgs, setPrevImgs] = useState([])
+    const [newImgs, setNewImgs] = useState([])
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -31,9 +33,15 @@ function UpdateProduct() {
 
     useEffect(() => {
         axios.get(`/api/products/${productId}`)
-            .then(res => setProduct(res.data.data))
+            .then((res) => {
+                setPrevImgs(res.data.data.product_images)
+                res.data.data.product_images = [];
+                setProduct(res.data.data)
+            })
             .catch(err => console.log(err));
     }, [productId]);
+
+
 
     const onChangeHandler = (e) => {
         const { name, value } = e.target;
@@ -44,7 +52,11 @@ function UpdateProduct() {
         e.preventDefault();
         setLoading(true);
 
-        axios.patch(`/api/products/${productId}`, product)
+        if(product.product_images.length < 2){
+            product.product_images = [...prevImgs];
+        }
+
+        axios.put(`/api/products/${productId}`, product)
             .then(res => {
                 toast.success("Product updated successfully!", {
                     position: "top-right",
@@ -109,9 +121,9 @@ function UpdateProduct() {
                 <div>
                     <div className="previous-images flex my-4 gap-5">
                         <h2 className="text-blue-950 text-lg font-semibold ms-3">Previous Images : </h2>
-                        {product.product_images.map((img, idx) => {
+                        {prevImgs.map((img, idx) => {
                             return (
-                                <div className="border border-gray-300 rounded p-2">
+                                <div className="border border-gray-300 rounded p-2" key={idx}>
                                     <img src={img.url} alt="Product" className="w-16" />
                                 </div>
                             )
