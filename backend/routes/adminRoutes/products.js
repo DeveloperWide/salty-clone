@@ -29,8 +29,11 @@ router.get("/:id", adminProductController.showProduct)
 // Update Product Field
 router.patch("/:id", adminProductController.updateProductField)
 
-// Update Product
+// Get The Product We Want to Update
 router.get("/:id", adminProductController.productToBeUpdated)
+
+// Update Product
+router.put("/:id", adminProductController.updateProduct)
 
 // Delete Product
 router.delete("/:id", adminProductController.deleteProduct)

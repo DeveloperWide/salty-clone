@@ -85,20 +85,22 @@ module.exports.updateProductField = wrapAsync(async (req, res, next) => {
     }
 });
 
-module.exports.productToBeUpdated = async (req, res) => {
-    try{
-        let {id} = req.params;
+module.exports.productToBeUpdated = wrapAsync(
+    async (req, res, next) => {
+        let { id } = req.params;
         let productToBeUpdated = await Product.findById(id);
+        if (!productToBeUpdated) {
+            return next(new ExpressError(400, `No Product Exist`));
+        }
         res.status(200).json({
             success: true,
             data: productToBeUpdated
         })
-    }catch(err){
-        res.status(500).json({
-            success: false,
-            message: "Server Error Occurred"
-        })
     }
+);
+
+module.exports.updateProduct = async(req, res) => {
+    console.log(req.body);
 }
 
 module.exports.deleteProduct = wrapAsync(async (req, res, next) => {
